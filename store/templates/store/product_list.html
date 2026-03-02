@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Store | Product List</title>
+    <link rel="stylesheet" href="{% static 'store/css/space.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Cosmic Market</h1>
+            <p>Explore products from across the galaxy</p>
+        </header>
+
+        <section>
+            <h2>Featured Recommendations</h2>
+            <div class="product-grid">
+                {% for product in recommendations %}
+                <div class="glass-card product-card">
+                    <div>
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description|truncatewords:10 }}</p>
+                        <div class="tag-container">
+                            {% for tag in product.tags %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="price">₱{{ product.price }}</div>
+                </div>
+                {% empty %}
+                <p>No cosmic suggestions yet. Add some products!</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section style="margin-top: 4rem;">
+            <h2>All Galaxy Inventory</h2>
+            <div class="product-grid">
+                {% for product in products %}
+                <div class="glass-card product-card">
+                    <div>
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                        <div class="tag-container">
+                            {% for tag in product.tags %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="price">₱{{ product.price }}</div>
+                </div>
+                {% empty %}
+                <p>The galaxy is empty. Be the first to trade!</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer style="margin-top: 4rem; text-align: center;">
+            <a href="{% url 'add_product' %}" class="btn">Launch New Product</a>
+        </footer>
+    </div>
+</body>
+
+</html>

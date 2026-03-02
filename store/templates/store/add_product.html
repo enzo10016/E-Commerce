@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Store | Launch Product</title>
+    <link rel="stylesheet" href="{% static 'store/css/space.css' %}">
+</head>
+
+<body>
+    <div class="container" style="max-width: 600px;">
+        <header>
+            <h1>Launch Product</h1>
+            <p>Add your item to the intergalactic catalog</p>
+        </header>
+
+        <div class="glass-card">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Mission Launch</button>
+            </form>
+            <br>
+            <div style="text-align: center;">
+                <a href="{% url 'product_list' %}" style="color: var(--nebula-pink);">Abort and return to base</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
