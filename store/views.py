@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from .models import Product
 from .forms import ProductForm
 import os
 
 # Mock or Real OpenAI Integration
 def generate_tags(name, description):
-    # In a real scenario, we'd use openai library
-    # For this activity, we simulate the AI response or use simple logic
-    # if no key is provided.
+    # Retrieve the key from settings
+    api_key = getattr(settings, 'OPENAI_API_KEY', None)
+    
+    # Simple logic fallback if key is missing or for this activity
     base_tags = [name.lower(), "ecommerce", "premium"]
     words = description.lower().split()
     extra_tags = [w for w in words if len(w) > 4][:3]
